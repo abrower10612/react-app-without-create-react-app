@@ -23,7 +23,7 @@ class App extends React.Component {
     }
 
     handleClick() {
-        this.setState({ loading: true })
+        this.setState({ loading: true, show: false })
         setTimeout(function() {
             this.setState((previousState) => { 
                 if (previousState.user === true) {
@@ -34,7 +34,7 @@ class App extends React.Component {
         }.bind(this), 2000);
 
         setTimeout(function() {
-            this.setState({ show:false });
+            this.setState({ show: false });
        }.bind(this), 4000);
     }
     
@@ -55,7 +55,8 @@ class App extends React.Component {
                     <div
                         style={{
                             width: '300px',
-                            border: 'solid 2px black',
+                            border: 'solid 2px #495057',
+                            boxShadow: '5px 5px 5px #00000050',
                             borderRadius: '5px',
                             padding: '20px',
                             position: 'relative',
@@ -68,6 +69,7 @@ class App extends React.Component {
                             style={{ margin: '0 auto', display: 'block', width: '50%', marginBottom: "40px" }}
                         />
                         <Button 
+                            variant={this.state.user === true ? `secondary` : `success`}
                             onClick={() => this.handleClick()}
                             style={{ width: '100%', height: '60px', fontSize: '1.25rem' }}
                             disabled={this.state.loading}
