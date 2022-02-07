@@ -12,7 +12,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>Hello World</h1>
+                <h1>Hello World with Class Based Components in React</h1>
                 <TestComponent color="red" user={this.state.user}/>
                 <button onClick={() => this.setState({ user: !this.state.user })}>{this.state.user === false ? `Log In` : `Log Out`}</button>
             </div>
