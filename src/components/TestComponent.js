@@ -12,7 +12,7 @@ class TestComponent extends React.Component {
         return (
             <div>
                 <h2 style={{ color: this.state.color }}>Hello from imported TestComponent</h2>
-                <div>{this.props.user === false ? `Successfully Logged In` : `Successfully Logged Out`}</div>
+                <div>{this.props.user === false ? `Successfully Logged Out` : `Successfully Logged In`}</div>
             </div>
         )
     }
