@@ -1,9 +1,19 @@
 import React from "react";
 
 class TestComponent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            color: this.props.color
+        }
+    }
+
     render() {
         return (
-            <h2>Hello from imported TestComponent</h2>
+            <div>
+                <h2 style={{ color: this.state.color }}>Hello from imported TestComponent</h2>
+                <div>{this.props.user === false ? `Successfully Logged In` : `Successfully Logged Out`}</div>
+            </div>
         )
     }
 }
