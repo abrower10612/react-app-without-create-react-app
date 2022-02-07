@@ -69,7 +69,7 @@ class App extends React.Component {
                             style={{ margin: '0 auto', display: 'block', width: '50%', marginBottom: "40px" }}
                         />
                         <Button 
-                            variant={this.state.user === true ? `secondary` : `success`}
+                            variant={this.state.user === true ? `secondary` : `primary`}
                             onClick={() => this.handleClick()}
                             style={{ width: '100%', height: '60px', fontSize: '1.25rem' }}
                             disabled={this.state.loading}
