@@ -1,21 +1,52 @@
 import React from "react";
-import TestComponent from "./components/TestComponent";
+import AuthMessage from "./components/AuthMessage";
+import { Button, Toast } from 'react-bootstrap';
+import Logo from './images/logo.png';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: false
+            user: false,
+            show: false
         }
     }
 
     render() {
         return (
-            <div>
-                <h1>Hello World with Class Based Components in React</h1>
-                <TestComponent color="red" user={this.state.user}/>
-                <button onClick={() => this.setState({ user: !this.state.user })}>{this.state.user === false ? `Log In` : `Log Out`}</button>
-            </div>
+            <>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%'
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '300px',
+                            border: 'solid 2px black',
+                            borderRadius: '5px',
+                            padding: '20px',
+                        }}
+                    >
+                        {this.state.show && <AuthMessage user={this.state.user} />}
+                        <img 
+                            src={Logo} 
+                            alt="" 
+                            style={{ margin: '0 auto', display: 'block', width: '50%', marginBottom: "40px" }}
+                        />
+                        <Button 
+                            onClick={() => {
+                                this.setState({ user: !this.state.user, show: true })
+                            }}
+                            style={{ width: '100%' }}
+                        >{this.state.user === false ? `Log In` : `Log Out`}</Button>
+                    </div>
+                </div>
+            </>
         )
     }
 }
