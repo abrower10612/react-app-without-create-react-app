@@ -1,6 +1,6 @@
 import React from "react";
 import AuthMessage from "./components/AuthMessage";
-import { Button, Toast } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import Logo from './images/logo.png';
 
 class App extends React.Component {
@@ -8,13 +8,41 @@ class App extends React.Component {
         super(props);
         this.state = {
             user: false,
-            show: false
-        }
+            show: false,
+            loading: false
+        },
+        this.handleClick = this.handleClick.bind(this);
     }
 
+    componentDidMount() {
+        console.log('Component did mount 🔥');
+    }
+
+    componentDidUpdate() {
+        console.log('Component did update 🔥');
+    }
+
+    handleClick() {
+        this.setState({ loading: true })
+        setTimeout(function() {
+            this.setState((previousState) => { 
+                if (previousState.user === true) {
+                    return { user: false, show: true, loading: false }
+                }
+                return { user: true, show: true, loading: false }
+            })
+        }.bind(this), 2000);
+
+        setTimeout(function() {
+            this.setState({ show:false });
+       }.bind(this), 4000);
+    }
+    
     render() {
         return (
             <>
+                {this.state.show && <AuthMessage user={this.state.user} />}
+                {console.log('rendering 🔥')}
                 <div
                     style={{
                         display: 'flex',
@@ -30,20 +58,25 @@ class App extends React.Component {
                             border: 'solid 2px black',
                             borderRadius: '5px',
                             padding: '20px',
+                            position: 'relative',
+                            paddingTop: '30px'
                         }}
                     >
-                        {this.state.show && <AuthMessage user={this.state.user} />}
                         <img 
                             src={Logo} 
                             alt="" 
                             style={{ margin: '0 auto', display: 'block', width: '50%', marginBottom: "40px" }}
                         />
                         <Button 
-                            onClick={() => {
-                                this.setState({ user: !this.state.user, show: true })
-                            }}
-                            style={{ width: '100%' }}
-                        >{this.state.user === false ? `Log In` : `Log Out`}</Button>
+                            onClick={() => this.handleClick()}
+                            style={{ width: '100%', height: '60px', fontSize: '1.25rem' }}
+                            disabled={this.state.loading}
+                        >{this.state.loading === true
+                            ? <Spinner animation="border" variant="light" />
+                            : this.state.user === false 
+                            ? `Log In` 
+                            : `Log Out`}
+                        </Button>
                     </div>
                 </div>
             </>
